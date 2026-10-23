@@ -1,0 +1,130 @@
+
+console.log('STUDENT SCORE ARRAY ANALYZER');
+
+// Store the original names and final scores.
+const studentNames = ['Ana', 'Ben', 'Carla', 'Daniel', 'Ella'];
+const studentScores = [85, 72, 91, 64, 78];
+
+// Store three activity scores for each original student.
+const activityScores = [
+    [80, 85, 90],
+    [70, 72, 74],
+    [88, 92, 95],
+    [60, 65, 67],
+    [75, 78, 81]
+];
+
+// Preserve the original names for the activity matrix.
+const originalNames = Array.from(studentNames);
+
+console.log('\nPART A: ORIGINAL RECORDS');
+
+// Display every student's index, name, and score.
+for (let i = 0; i < studentNames.length; i++) {
+    console.log(`${i} - ${studentNames[i]}: ${studentScores[i]}`);
+}
+
+console.log('\nPART B: ADD NEW STUDENTS');
+
+// Add Faith and 88 at the end.
+studentNames.push('Faith');
+studentScores.push(88);
+
+// Add Aaron and 76 at the beginning.
+studentNames.unshift('Aaron');
+studentScores.unshift(76);
+
+// Display updated arrays and number of students.
+console.log('Updated Names:', studentNames);
+console.log('Updated Scores:', studentScores);
+console.log('Number of Students:', studentNames.length);
+
+console.log('\nPART C: REMOVE STUDENTS');
+
+// Remove the first student.
+studentNames.shift();
+studentScores.shift();
+
+// Remove the last student.
+studentNames.pop();
+studentScores.pop();
+
+// Find Daniel's index.
+const danielIndex = studentNames.indexOf('Daniel');
+
+// Remove Daniel and Daniel's score.
+if (danielIndex !== -1) {
+    studentNames.splice(danielIndex, 1);
+    studentScores.splice(danielIndex, 1);
+}
+
+// Insert Grace and 82 at index 2.
+studentNames.splice(2, 0, 'Grace');
+studentScores.splice(2, 0, 82);
+
+// Display the updated arrays.
+console.log('Names:', studentNames);
+console.log('Scores:', studentScores);
+
+console.log('\nPART D: CLASS STATISTICS');
+
+// Calculate the total score.
+let totalScore = 0;
+
+for (let i = 0; i < studentScores.length; i++) {
+    totalScore += studentScores[i];
+}
+
+// Calculate the average score.
+const averageScore = totalScore / studentScores.length;
+
+// Find the highest score.
+let highestScore = studentScores[0];
+
+for (let i = 1; i < studentScores.length; i++) {
+    if (studentScores[i] > highestScore) {
+        highestScore = studentScores[i];
+    }
+}
+
+// Find the lowest score.
+let lowestScore = studentScores[0];
+
+for (let i = 1; i < studentScores.length; i++) {
+    if (studentScores[i] < lowestScore) {
+        lowestScore = studentScores[i];
+    }
+}
+
+// Display all statistics.
+console.log('Total Score:', totalScore);
+console.log('Average Score:', averageScore.toFixed(2));
+console.log('Highest Score:', highestScore);
+console.log('Lowest Score:', lowestScore);
+
+console.log('\nPART E: PASSING-SCORE ANALYSIS');
+
+const passingScore = 75;
+
+// Get passing scores.
+const passingStudents = studentScores.filter(
+    score => score >= passingScore
+);
+
+// Get failing scores.
+const failingStudents = studentScores.filter(
+    score => score < passingScore
+);
+
+console.log('Passing Scores:', passingStudents);
+console.log('Failing Scores:', failingStudents);
+console.log('Number Passed:', passingStudents.length);
+console.log('Number Failed:', failingStudents.length);
+
+console.log('\nPART F: SORTING SCORES');
+
+// Sort scores from lowest to highest.
+const sortedScores = [...studentScores].sort((a, b) => a - b);
+
+console.log('Ascending Order:', sortedScores);
+console.log('Descending Order:', [...sortedScores].reverse());
