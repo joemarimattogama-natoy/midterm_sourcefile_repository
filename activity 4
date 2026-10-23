@@ -1,0 +1,129 @@
+
+'use strict';
+
+console.log('CAMPUS IT SUPPORT REQUEST MANAGER');
+
+// ==========================================
+// PART A: STACK
+// ==========================================
+
+class Stack {
+    constructor() {
+        // Create the internal storage.
+        this.items = [];
+    }
+
+    push(element) {
+        // Add an element to the top.
+        this.items.push(element);
+    }
+
+    pop() {
+        // Remove and return the top element.
+        return this.items.pop();
+    }
+
+    peek() {
+        // Return the top without removing it.
+        return this.items[this.items.length - 1];
+    }
+
+    isEmpty() {
+        // Return true when empty.
+        return this.items.length === 0;
+    }
+
+    size() {
+        // Return the number of elements.
+        return this.items.length;
+    }
+
+    toString() {
+        // Return all elements as text.
+        return this.items.join(', ');
+    }
+}
+
+// ==========================================
+// PART B: QUEUE
+// ==========================================
+
+class Queue {
+    constructor() {
+        this.items = [];
+    }
+
+    enqueue(element) {
+        // Add a request to the end.
+        this.items.push(element);
+    }
+
+    dequeue() {
+        // Remove the oldest request.
+        return this.items.shift();
+    }
+
+    front() {
+        // View the oldest request.
+        return this.items[0];
+    }
+
+    isEmpty() {
+        return this.items.length === 0;
+    }
+
+    size() {
+        return this.items.length;
+    }
+
+    toString() {
+        return this.items.join(', ');
+    }
+}
+
+// ==========================================
+// PART C: SUPPORT REQUESTS
+// ==========================================
+
+const requestHistory = new Stack();
+const pendingRequests = new Queue();
+
+// Add support requests to the queue.
+pendingRequests.enqueue('Computer cannot start');
+pendingRequests.enqueue('Internet connection problem');
+pendingRequests.enqueue('Printer not working');
+pendingRequests.enqueue('Forgot computer password');
+
+console.log('\nPENDING SUPPORT REQUESTS');
+console.log(pendingRequests.toString());
+
+// Process the requests in first-in, first-out order.
+console.log('\nPROCESSING REQUESTS');
+
+while (!pendingRequests.isEmpty()) {
+    const request = pendingRequests.dequeue();
+
+    console.log('Processing:', request);
+
+    // Save processed requests in the history stack.
+    requestHistory.push(request);
+}
+
+console.log('\nPROCESSED REQUEST HISTORY');
+console.log(requestHistory.toString());
+
+console.log('\nLATEST PROCESSED REQUEST');
+console.log(requestHistory.peek());
+
+console.log('\nTOTAL PROCESSED REQUESTS');
+console.log(requestHistory.size());
+
+// Undo the most recently processed request.
+console.log('\nUNDO LAST REQUEST');
+
+const lastRequest = requestHistory.pop();
+
+console.log('Removed from history:', lastRequest);
+console.log('Remaining history:', requestHistory.toString());
+
+console.log('\nSUPPORT REQUEST MANAGER FINISHED');
